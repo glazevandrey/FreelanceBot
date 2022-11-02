@@ -51,6 +51,10 @@ namespace FreelanceBot.Actions.EventAction
                 all = db.Events.Where(m=>m.IsDone == true).ToList();
                 foreach (var item in all)
                 {
+                    if(item.StartDate == null)
+                    {
+                        continue;
+                    }
                     DateTime dbDate = new DateTime();
 
                     try
@@ -70,10 +74,10 @@ namespace FreelanceBot.Actions.EventAction
                         {
                             logger.Error(ex + "second2");
 
-                            return;
+                            continue;
                         }
                     
-                }
+                     }
 
 
                     if(dbDate == date)
