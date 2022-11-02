@@ -43,7 +43,7 @@ namespace FreelanceBot.Actions.EventAction
             {
                 try
                 {
-                    Search.SendFile(update, user, "event");
+                    Search.SendFile(update, user, "event", count, max);
                 }
                 catch (Exception ex)
                 {

@@ -36,8 +36,38 @@ namespace FreelanceBot
         public static void StartInit()
         {
             string jsonString = System.IO.File.ReadAllText("config.json", Encoding.UTF8);
-            Program.config = System.Text.Json.JsonSerializer.Deserialize<Config>(jsonString);
-            
+
+
+            // Program.config = System.Text.Json.JsonSerializer.Deserialize<Config>(jsonString);
+            Program.config = new Config()
+            {
+                Specialization = new List<string>()
+            {
+
+                 "Imposer",
+    "Programmer",
+    "Software tester",
+    "System administrator",
+    "Screenwriter of computer games",
+    "Neural interface designer",
+    "IOS developer",
+    "Android developer",
+    "Database architect",
+    "Database developer",
+    "Network administrator",
+    "Game developer",
+    "System engineer",
+    "Information systems specialist",
+    "Front-end developer",
+    "UX designer",
+    "UI designer",
+    "UX/UI designer",
+    "Graphic designer",
+    "Illustrator_designer",
+    "QA engineer",
+    "Product designer"
+            }
+            };
             Program.botClient = new Telegram.Bot.TelegramBotClient("5784734017:AAGIa3V48q-dl4hdTGvXxMZOX-y43KCWQFg");
 
             using (var db = new UserContext())

@@ -13,11 +13,11 @@ namespace FreelanceBot.Actions.BossSearchingActions
             Program.stageService.SetStage(update.Message.From.Id, 24);
 
             
-            var btn1 = "Searching by specialization";
-            var btn3 = "Searching by level";
-            var btn4 = "Searching by selary";
-            var btn5 = "Searching by county/city";
-            var btn6 = "Searching by text";
+            var btn1 = "By speciality";
+            var btn3 = "By level";
+            var btn4 = "By salary";
+            var btn5 = "By country/city";
+            var btn6 = "By text";
             var btn7 = "Back";
 
             var  mist =new List<string>() { btn1, btn3, btn4, btn5, btn6, btn7 };

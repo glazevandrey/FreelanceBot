@@ -208,7 +208,7 @@ namespace FreelanceBot.Helpers
 
         }
 
-        public async static void SendFile(Update update, User user, string type)
+        public async static void SendFile(Update update, User user, string type, int count, int max)
         {
             string name = "";
             if (update.Message.Document != null)
@@ -371,7 +371,7 @@ namespace FreelanceBot.Helpers
 
                     var rkm2 = new ReplyKeyboardMarkup(new List<KeyboardButton>() { btn11, btn22, btn33 });
                     rkm2.ResizeKeyboard = true;
-                    await Program.botClient.SendDocumentAsync(update.Message.From.Id, iof, caption: text, parseMode: Telegram.Bot.Types.Enums.ParseMode.Html);
+                    await Program.botClient.SendDocumentAsync(update.Message.From.Id, iof, caption: $"<b>{count+1}/{max}</b>" + text, parseMode: Telegram.Bot.Types.Enums.ParseMode.Html);
                     await Program.botClient.SendTextMessageAsync(update.Message.From.Id, "Great! You are one step away from placing!\n\nIf everything suits you click Done if not Go Back or Cancel", replyMarkup: rkm2);
 
                     return;

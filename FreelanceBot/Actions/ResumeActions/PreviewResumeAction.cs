@@ -24,11 +24,14 @@ namespace FreelanceBot.Actions.ResumeActions
         public async Task Start(Update update)
         {
             Program.stageService.SetStage(update.Message.From.Id, 17);
+            int count = 0;
 
             var user = new User();
             using (var db = new UserContext())
             {
                 user = db.Users.FirstOrDefault(m=>m.ChatId == update.Message.From.Id);
+                count = db.Resumes.Where(m => m.UserId == update.Message.From.Id && m.IsDone == true).ToList().Count();
+
             }
 
             int max = user.MaxResumes;
@@ -36,7 +39,7 @@ namespace FreelanceBot.Actions.ResumeActions
             {
                 try
                 {
-                    Search.SendFile(update, user, "resume");
+                    Search.SendFile(update, user, "resume", count, max);
                 }
                 catch (Exception ex)
                 {
@@ -58,12 +61,10 @@ namespace FreelanceBot.Actions.ResumeActions
             }
 
             var resume2 = new Resume();
-            int count = 0;
 
             using (var db = new UserContext())
             {
                 resume2 = db.Resumes.FirstOrDefault(m => m.UserId == update.Message.From.Id && m.IsDone == false);
-                count = db.Resumes.Where(m => m.UserId == update.Message.From.Id && m.IsDone == true).ToList().Count();
             }
             string text2 = Program.ResumeView;
 

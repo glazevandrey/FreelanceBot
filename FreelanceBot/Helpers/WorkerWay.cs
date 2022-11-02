@@ -128,15 +128,15 @@ namespace FreelanceBot.Helpers
 
             switch (name)
             {
-                case "Searching by specialization":
+                case "By speciality":
                     return new SearchingBySpecWorkerAction();
-                case "Searching by text":
+                case "By text":
                     return new SearchingByTextWorkerAction();
-                case "Searching by level":
+                case "By level":
                     return new SeachingByLevelWorkerAction();
-                case "Searching by selary":
+                case "By salary":
                     return new SearchingByPayWorkerAction();
-                case "Searching by county/city":
+                case "By country/city":
                     return new SeachingByPlaceWorkerAction();
                 default:
                     break;

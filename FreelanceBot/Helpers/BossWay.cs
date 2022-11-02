@@ -118,7 +118,7 @@ namespace FreelanceBot.Helpers
 
                     result.Add(new MainMenuBossAction());
 
-                    SendToChannel.Send(evnt, user);
+                    //SendToChannel.Send(evnt, user);
                     SendToChannel.SendEventToAdmin(evnt, user);
                 }
             }
@@ -208,15 +208,15 @@ namespace FreelanceBot.Helpers
             
             switch (name)
             {
-                case "Searching by specialization":
+                case "By speciality":
                     return new SearchingBySpecAction();
-                case "Searching by text":
+                case "By text":
                     return new SearchingByTextAction();
-                case "Searching by level":
+                case "By level":
                     return new SeachingByLevelAction();
-                case "Searching by selary":
+                case "By salary":
                     return new SearchingByPayAction();
-                case "Searching by county/city":
+                case "By country/city":
                     return new SeachingByPlaceAction();
                 default:
                     break;

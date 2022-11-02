@@ -4,7 +4,6 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>6b328ad5-4712-4430-8221-ad5d50f2d83c</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-	  <RuntimeIdentifiers>ubuntu.14.04-x64</RuntimeIdentifiers>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,7 +14,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
     <PackageReference Include="NLog.Extensions.Logging" Version="5.1.0" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.1" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.0" />
     <PackageReference Include="Telegram.Bot" Version="18.0.0" />
     <PackageReference Include="Telegram.Bot.Extensions.Polling" Version="1.0.2" />
   </ItemGroup>
