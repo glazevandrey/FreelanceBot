@@ -68,7 +68,7 @@ namespace FreelanceBot
     "Product designer"
             }
             };
-            Program.botClient = new Telegram.Bot.TelegramBotClient("5784734017:AAGIa3V48q-dl4hdTGvXxMZOX-y43KCWQFg");
+            Program.botClient = new Telegram.Bot.TelegramBotClient("5604138902:AAF5nhVvfX9OrMwriHSTdAK1XO5h-hS3l_Y");
 
             using (var db = new UserContext())
             {
