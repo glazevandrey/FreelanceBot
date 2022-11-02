@@ -36,7 +36,7 @@ namespace FreelanceBot.Actions.EventAction
 
                         var rkm2 = new InlineKeyboardMarkup(btn1);
 
-                        await Program.botClient.SendTextMessageAsync(update.Message.From.Id, "You have reached the maximum number of events", replyMarkup: rkm2);
+                        await Program.botClient.SendTextMessageAsync(update.Message.From.Id, "Sorry 😔. You have reached the maximum number of events", replyMarkup: rkm2);
                         Program.stageService.SetStage(update.Message.From.Id, 2);
 
                         return;

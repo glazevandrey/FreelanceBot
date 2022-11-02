@@ -25,12 +25,13 @@ namespace FreelanceBot.Helpers
         }
         private static async void Update(string type, string username)
         {
+            var user = new FreelanceBot.Models.User();
             switch (type)
             {
                 case "job":
                     using (var db = new UserContext())
                     {
-                        var user = db.Users.FirstOrDefault(m=>m.Username == username);
+                        user = db.Users.FirstOrDefault(m=>m.Username == username);
                         if(user == null)
                         {
                             return;
@@ -44,7 +45,7 @@ namespace FreelanceBot.Helpers
                 case "event":
                     using (var db = new UserContext())
                     {
-                        var user = db.Users.FirstOrDefault(m => m.Username == username);
+                        user = db.Users.FirstOrDefault(m => m.Username == username);
                         if (user == null)
                         {
                             return;
@@ -58,7 +59,7 @@ namespace FreelanceBot.Helpers
                 case "resume":
                     using (var db = new UserContext())
                     {
-                        var user = db.Users.FirstOrDefault(m => m.Username == username);
+                        user = db.Users.FirstOrDefault(m => m.Username == username);
                         if (user == null)
                         {
                             return;
@@ -71,7 +72,10 @@ namespace FreelanceBot.Helpers
                     break;
                 default:
                     break;
+
             }
+
+            await Program.botClient.SendTextMessageAsync(user.ChatId, $"Hi! Admin provided for you a new pakage of 5 {type}s for posting 🥳!");
         }
     }
 }
