@@ -1,5 +1,6 @@
 ﻿using FreelanceBot.Database;
 using FreelanceBot.Models;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -13,6 +14,8 @@ namespace FreelanceBot.Actions.EventAction
 {
     public class WantAttachEvent : IBaseAction
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         public async Task Start(Update update)
         {
             Program.stageService.SetStage(update.Message.From.Id, 21);
@@ -24,13 +27,15 @@ namespace FreelanceBot.Actions.EventAction
             {
                 date = DateTime.ParseExact(update.Message.Text.Trim(), "dd/MM/yyyy hh:mm tt", System.Globalization.CultureInfo.InvariantCulture);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                logger.Error(ex  + "first");
+
                 try
                 {
                     date = DateTime.ParseExact(update.Message.Text.Trim(), "d/M/yyyy h:m tt", System.Globalization.CultureInfo.InvariantCulture);
                 }
-                catch (Exception)
+                catch (Exception ex2)
                 {
 
                     await Program.botClient.SendTextMessageAsync(update.Message.From.Id, "You should enter date in format day/month/year hour:minutes AM/PM\nFor example: 3/11/2022 5:12 AM");
@@ -54,6 +59,8 @@ namespace FreelanceBot.Actions.EventAction
                     }
                     catch (Exception ex)
                     {
+                        logger.Error(ex + "first2");
+
                         try
                         {
                             dbDate = DateTime.ParseExact(item.StartDate, "dd.MM.yyyy H:m", CultureInfo.InvariantCulture);
@@ -61,6 +68,7 @@ namespace FreelanceBot.Actions.EventAction
                         }
                         catch (Exception ex2)
                         {
+                            logger.Error(ex + "second2");
 
                             return;
                         }
