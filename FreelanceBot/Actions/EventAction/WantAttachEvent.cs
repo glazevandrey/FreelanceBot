@@ -69,12 +69,27 @@ namespace FreelanceBot.Actions.EventAction
                         {
                             dbDate = DateTime.ParseExact(item.StartDate, "dd.MM.yyyy H:m", CultureInfo.InvariantCulture);
 
+                          
                         }
                         catch (Exception ex2)
                         {
-                            logger.Error(ex + "second2");
+                            try
+                            {
+                                dbDate = DateTime.ParseExact(item.StartDate, "dd/MM/yyyy H:m", CultureInfo.InvariantCulture);
+                            }
+                            catch (Exception ex3)
+                            {
+                                try
+                                {
+                                    dbDate = DateTime.ParseExact(item.StartDate, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture);
 
-                            continue;
+                                }
+                                catch (Exception ex4)
+                                {
+
+                                    continue;
+                                }
+                            }
                         }
                     
                      }
