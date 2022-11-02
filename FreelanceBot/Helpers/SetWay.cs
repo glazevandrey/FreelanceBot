@@ -154,7 +154,7 @@ namespace FreelanceBot.Helpers
             }
 
 
-            if (update.Message.Text == "Change me")
+            if (update.Message.Text == "Change role")
             {
                 type = new ChangeClassAction();
                 result.Add(type);

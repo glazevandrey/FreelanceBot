@@ -11,7 +11,7 @@ namespace FreelanceBot.Actions
     {
         public  async Task Start(Update update)
         {
-            var rkm = new ReplyKeyboardMarkup(new List<KeyboardButton> { new KeyboardButton("Change me"), new KeyboardButton("Back") });
+            var rkm = new ReplyKeyboardMarkup(new List<KeyboardButton> { new KeyboardButton("Change role"), new KeyboardButton("Back") });
             rkm.ResizeKeyboard = true;
 
             await Program.botClient.SendTextMessageAsync(update.Message.From.Id, "<b>Select necessary option</b>", replyMarkup: rkm, parseMode: Telegram.Bot.Types.Enums.ParseMode.Html) ;
