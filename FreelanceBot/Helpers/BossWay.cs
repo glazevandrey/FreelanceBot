@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
+using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
 using Update = Telegram.Bot.Types.Update;
@@ -119,6 +120,7 @@ namespace FreelanceBot.Helpers
                     result.Add(new MainMenuBossAction());
 
                     //SendToChannel.Send(evnt, user);
+                    Program.botClient.SendTextMessageAsync(update.Message.From.Id, "Thank you! Your event request was sent to the admin of channel  \"Jobs & Events in IT\". He will contact you soon");
                     SendToChannel.SendEventToAdmin(evnt, user);
                 }
             }
