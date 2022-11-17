@@ -1,19 +1,14 @@
-﻿using System.Reflection;
-using System.Threading.Tasks;
-using System;
-using Telegram.Bot.Types.InputFiles;
-using Telegram.Bot.Types;
-using Telegram.Bot;
-using FreelanceBot.Executors;
-using Microsoft.Extensions.Logging;
+﻿using FreelanceBot.Executors;
 using FreelanceBot.Helpers;
 using NLog;
+using System.Threading.Tasks;
+using Telegram.Bot.Types;
 
 namespace FreelanceBot.Bot
 {
     public class BotService : IBotService
     {
-       private static Logger logger = LogManager.GetCurrentClassLogger();
+        private static Logger logger = LogManager.GetCurrentClassLogger();
 
         public MessageExecutor _executor;
 

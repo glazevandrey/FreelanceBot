@@ -12,7 +12,7 @@ namespace FreelanceBot.Helpers
     {
         public static IBaseAction Back(User user)
         {
-            if(user.Role == Role.Заказчик)
+            if (user.Role == Role.Заказчик)
             {
                 switch (user.Stage)
                 {

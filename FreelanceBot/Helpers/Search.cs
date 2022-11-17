@@ -6,11 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using Telegram.Bot;
-using Telegram.Bot.Types;
-using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.InputFiles;
 using Telegram.Bot.Types.ReplyMarkups;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using File = System.IO.File;
 using Update = Telegram.Bot.Types.Update;
 using User = FreelanceBot.Models.User;
@@ -42,7 +39,7 @@ namespace FreelanceBot.Helpers
                 }
                 else if (resume.PayMin != 0)
                 {
-                    text = text.Replace("[pay]", resume.PayMin.ToString() +" - "+ resume.PayMax.ToString()+ "$");
+                    text = text.Replace("[pay]", resume.PayMin.ToString() + " - " + resume.PayMax.ToString() + "$");
                 }
                 else
                 {
@@ -108,7 +105,7 @@ namespace FreelanceBot.Helpers
             }
             return res;
         }
-        public static void SendDef(long id )
+        public static void SendDef(long id)
         {
             var rkm2 = new ReplyKeyboardMarkup(new KeyboardButton("To main menu"));
             rkm2.ResizeKeyboard = true;
@@ -195,8 +192,8 @@ namespace FreelanceBot.Helpers
                     InputOnlineFile iof = new InputOnlineFile(stream);
                     iof.FileName = name;
 
-                    
-                    await Program.botClient.SendDocumentAsync(id, iof, caption: text, parseMode: Telegram.Bot.Types.Enums.ParseMode.Html, replyMarkup : rkm);
+
+                    await Program.botClient.SendDocumentAsync(id, iof, caption: text, parseMode: Telegram.Bot.Types.Enums.ParseMode.Html, replyMarkup: rkm);
 
                     return;
                 }
@@ -241,7 +238,7 @@ namespace FreelanceBot.Helpers
 
                 try
                 {
-                    if (update.Message.Photo[update.Message.Photo.Length-1].FileSize > 2097152)
+                    if (update.Message.Photo[update.Message.Photo.Length - 1].FileSize > 2097152)
                     {
                         throw new Exception("File is too biggest");
                     }
@@ -252,7 +249,7 @@ namespace FreelanceBot.Helpers
                     }
                     using (var db = new UserContext())
                     {
-                        if(type == "resume")
+                        if (type == "resume")
                         {
                             var resum = db.Resumes.FirstOrDefault(m => m.UserId == update.Message.From.Id && m.IsDone == false);
                             resum.HaveFile = true;
@@ -320,7 +317,7 @@ namespace FreelanceBot.Helpers
                     iof.FileName = name;
 
                     string text = "";
-                    if(type == "event")
+                    if (type == "event")
                     {
 
                         var resume = new Event();
@@ -364,14 +361,14 @@ namespace FreelanceBot.Helpers
                             text = text.Replace("[pay]", "No expectations");
                         }
                     }
-                  
+
                     var btn11 = new KeyboardButton("Done");
                     var btn22 = new KeyboardButton("Back");
                     var btn33 = new KeyboardButton("Cancel");
 
                     var rkm2 = new ReplyKeyboardMarkup(new List<KeyboardButton>() { btn11, btn22, btn33 });
                     rkm2.ResizeKeyboard = true;
-                    await Program.botClient.SendDocumentAsync(update.Message.From.Id, iof, caption: $"<b>{count+1}/{max}</b>" + text, parseMode: Telegram.Bot.Types.Enums.ParseMode.Html);
+                    await Program.botClient.SendDocumentAsync(update.Message.From.Id, iof, caption: $"<b>{count + 1}/{max}</b>" + text, parseMode: Telegram.Bot.Types.Enums.ParseMode.Html);
                     await Program.botClient.SendTextMessageAsync(update.Message.From.Id, "Great! You are one step away from placing!\n\nIf everything suits you click Done if not Go Back or Cancel", replyMarkup: rkm2);
 
                     return;

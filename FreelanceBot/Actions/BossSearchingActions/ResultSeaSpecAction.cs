@@ -41,10 +41,10 @@ namespace FreelanceBot.Actions.BossSearchingActions
                 var parsed = Search.Parse(update.CallbackQuery.Data);
                 spec = parsed[0];
                 offset = Convert.ToInt32(parsed[1]);
-                
+
             }
 
-            if(offset == 0 && update.Message != null && update.Message.Text != null)
+            if (offset == 0 && update.Message != null && update.Message.Text != null)
             {
                 Search.SendDef(id);
             }
@@ -53,11 +53,11 @@ namespace FreelanceBot.Actions.BossSearchingActions
             using (var db = new UserContext())
             {
                 list = db.Resumes.Where(m => m.IsDone == true && m.Title == spec).ToList();
-                
+
             }
 
-            Dictionary<int, string> dic = Search.FillKayValue(list);           
-          
+            Dictionary<int, string> dic = Search.FillKayValue(list);
+
 
             var rkm = new InlineKeyboardMarkup(Search.FillButtons(list, offset, spec, "spec"));
 
@@ -69,8 +69,8 @@ namespace FreelanceBot.Actions.BossSearchingActions
             }
             else
             {
-               
-             await Program.botClient.SendTextMessageAsync(id, neededText, replyMarkup: rkm, parseMode: Telegram.Bot.Types.Enums.ParseMode.Html);   
+
+                await Program.botClient.SendTextMessageAsync(id, neededText, replyMarkup: rkm, parseMode: Telegram.Bot.Types.Enums.ParseMode.Html);
 
             }
         }

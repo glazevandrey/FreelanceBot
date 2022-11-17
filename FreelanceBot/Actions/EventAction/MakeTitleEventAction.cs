@@ -15,7 +15,7 @@ namespace FreelanceBot.Actions.EventAction
             int max = 0;
             using (var db = new UserContext())
             {
-                max = db.Users.FirstOrDefault(m=>m.ChatId == update.Message.From.Id).MaxEvents;
+                max = db.Users.FirstOrDefault(m => m.ChatId == update.Message.From.Id).MaxEvents;
                 if (db.Events.FirstOrDefault(m => m.UserId == update.Message.From.Id && m.IsDone == false) != null)
                 {
 

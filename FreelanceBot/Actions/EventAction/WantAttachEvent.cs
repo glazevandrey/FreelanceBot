@@ -29,7 +29,7 @@ namespace FreelanceBot.Actions.EventAction
             }
             catch (Exception ex)
             {
-                logger.Error(ex  + "first");
+                logger.Error(ex + "first");
 
                 try
                 {
@@ -48,10 +48,10 @@ namespace FreelanceBot.Actions.EventAction
             using (var db = new UserContext())
             {
                 var ev = db.Events.FirstOrDefault(m => m.UserId == update.Message.From.Id && m.IsDone == false);
-                all = db.Events.Where(m=>m.IsDone == true).ToList();
+                all = db.Events.Where(m => m.IsDone == true).ToList();
                 foreach (var item in all)
                 {
-                    if(item.StartDate == null)
+                    if (item.StartDate == null)
                     {
                         continue;
                     }
@@ -69,7 +69,7 @@ namespace FreelanceBot.Actions.EventAction
                         {
                             dbDate = DateTime.ParseExact(item.StartDate, "dd.MM.yyyy H:m", CultureInfo.InvariantCulture);
 
-                          
+
                         }
                         catch (Exception ex2)
                         {
@@ -91,28 +91,29 @@ namespace FreelanceBot.Actions.EventAction
                                 }
                             }
                         }
-                    
-                     }
+
+                    }
 
 
-                    if(dbDate == date)
+                    if (dbDate == date)
                     {
                         await Program.botClient.SendTextMessageAsync(update.Message.From.Id, "Sorry this time is booked. Try set other time, or date");
                         Program.stageService.SetStage(update.Message.From.Id, 20);
                         return;
                     }
 
-                    if(dbDate < date)
+                    if (dbDate < date)
                     {
-                        if(dbDate.AddHours(1) >= date)
+                        if (dbDate.AddHours(1) >= date)
                         {
                             await Program.botClient.SendTextMessageAsync(update.Message.From.Id, "Sorry this time is booked. Try set other time, or date");
                             Program.stageService.SetStage(update.Message.From.Id, 20);
                             return;
                         }
-                    }else if (dbDate > date)
+                    }
+                    else if (dbDate > date)
                     {
-                        if(dbDate.AddHours(-1)  <= date)
+                        if (dbDate.AddHours(-1) <= date)
                         {
                             await Program.botClient.SendTextMessageAsync(update.Message.From.Id, "Sorry this time is booked. Try set other time, or date");
                             Program.stageService.SetStage(update.Message.From.Id, 20);

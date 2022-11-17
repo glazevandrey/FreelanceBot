@@ -1,18 +1,14 @@
 ﻿using FreelanceBot.Database;
+using FreelanceBot.Helpers;
 using FreelanceBot.Models;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
-using Telegram.Bot.Types.InputFiles;
 using Telegram.Bot.Types.ReplyMarkups;
 using User = FreelanceBot.Models.User;
-using System.Linq;
-using File = System.IO.File;
-using FreelanceBot.Helpers;
 
 namespace FreelanceBot.Actions.EventAction
 {
@@ -37,7 +33,7 @@ namespace FreelanceBot.Actions.EventAction
                 max = user.MaxEvents;
                 db.SaveChanges();
             }
-            
+
 
             if (update.Message.Type != Telegram.Bot.Types.Enums.MessageType.Text)
             {
@@ -80,7 +76,7 @@ namespace FreelanceBot.Actions.EventAction
             var btn2 = new KeyboardButton("Back");
             var btn3 = new KeyboardButton("Cancel");
 
-            var rkm = new ReplyKeyboardMarkup(new List<KeyboardButton>() { btn1, btn2 , btn3});
+            var rkm = new ReplyKeyboardMarkup(new List<KeyboardButton>() { btn1, btn2, btn3 });
             rkm.ResizeKeyboard = true;
             await Program.botClient.SendTextMessageAsync(update.Message.From.Id, $"<b>({count + 1}/{max})</b>\n\n" + text2, parseMode: Telegram.Bot.Types.Enums.ParseMode.Html);
 

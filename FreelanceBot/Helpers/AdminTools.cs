@@ -11,7 +11,7 @@ namespace FreelanceBot.Helpers
         {
             var text = update.Message.Text;
             var split = text.Split(" ");
-            if(split.Length < 3)
+            if (split.Length < 3)
             {
                 await Program.botClient.SendTextMessageAsync(update.Message.From.Id, "Error. Example: /pack andreyglazev job");
                 return;
@@ -21,7 +21,7 @@ namespace FreelanceBot.Helpers
             var type = split[2];
 
             Update(type, username);
-         
+
         }
         private static async void Update(string type, string username)
         {
@@ -31,15 +31,15 @@ namespace FreelanceBot.Helpers
                 case "job":
                     using (var db = new UserContext())
                     {
-                        user = db.Users.FirstOrDefault(m=>m.Username == username);
-                        if(user == null)
+                        user = db.Users.FirstOrDefault(m => m.Username == username);
+                        if (user == null)
                         {
                             return;
                         }
 
                         user.MaxJobs = user.MaxJobs + 5;
                         db.SaveChanges();
-                        
+
                     }
                     break;
                 case "event":

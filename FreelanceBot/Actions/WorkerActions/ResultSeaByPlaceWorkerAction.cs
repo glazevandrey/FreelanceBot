@@ -1,13 +1,13 @@
 ﻿using FreelanceBot.Database;
 using FreelanceBot.Helpers;
 using FreelanceBot.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using System;
-using Telegram.Bot.Types.ReplyMarkups;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
-using System.Linq;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace FreelanceBot.Actions.WorkerActions
 {
@@ -68,4 +68,4 @@ namespace FreelanceBot.Actions.WorkerActions
         }
     }
 
-    }
+}

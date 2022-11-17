@@ -15,7 +15,7 @@ namespace FreelanceBot.Actions.EventAction
 
             using (var db = new UserContext())
             {
-                var ev = db.Events.FirstOrDefault(m=>m.UserId == update.Message.From.Id && m.IsDone == false);
+                var ev = db.Events.FirstOrDefault(m => m.UserId == update.Message.From.Id && m.IsDone == false);
                 if (update.Message.Text != "Back")
                 {
                     ev.Title = update.Message.Text;

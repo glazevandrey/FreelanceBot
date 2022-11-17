@@ -1,6 +1,4 @@
 ﻿using FreelanceBot.Actions;
-using FreelanceBot.Actions.BossSearchingActions;
-using FreelanceBot.Actions.JobActions;
 using FreelanceBot.Actions.ResumeActions;
 using FreelanceBot.Actions.WorkerActions;
 using FreelanceBot.Database;
@@ -46,7 +44,7 @@ namespace FreelanceBot.Helpers
             }
             if (user.Stage == Models.Stage.ЖелаетеПрикрепить)
             {
-                if(update.Message.Text == "Yes")
+                if (update.Message.Text == "Yes")
                 {
                     result.Add(new AttachFileAction());
                 }

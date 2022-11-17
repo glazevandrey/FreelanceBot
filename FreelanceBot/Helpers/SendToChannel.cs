@@ -1,16 +1,9 @@
-﻿using FreelanceBot.Database;
-using FreelanceBot.Models;
+﻿using FreelanceBot.Models;
 using System.IO;
-using System.Xml.Linq;
 using Telegram.Bot;
-using Telegram.Bot.Types;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using Telegram.Bot.Types.InputFiles;
-using User = FreelanceBot.Models.User;
 using File = System.IO.File;
-using System.Linq;
-using static System.Net.Mime.MediaTypeNames;
-using System;
+using User = FreelanceBot.Models.User;
 
 namespace FreelanceBot.Helpers
 {
@@ -27,7 +20,7 @@ namespace FreelanceBot.Helpers
         public static async void SendNewPackage(string data)
         {
             var split = data.Split(":");
-            if(split.Length < 4)
+            if (split.Length < 4)
             {
                 return;
             }
@@ -46,7 +39,7 @@ namespace FreelanceBot.Helpers
             string text2 = Program.EventView;
 
             text2 = text2.Replace("[title]", evnt.Title);
-            text2 = text2.Replace("[username]",  "@" + user.Username);
+            text2 = text2.Replace("[username]", "@" + user.Username);
             text2 = text2.Replace("[description]", evnt.Description);
             text2 = text2.Replace("[date]", evnt.StartDate);
 
@@ -120,7 +113,7 @@ namespace FreelanceBot.Helpers
             }
             else if (job.PayMin != 0)
             {
-                text = text.Replace("[pay]", job.PayMin.ToString() + " - "+ job.PayMax.ToString() + "$");
+                text = text.Replace("[pay]", job.PayMin.ToString() + " - " + job.PayMax.ToString() + "$");
             }
             else
             {

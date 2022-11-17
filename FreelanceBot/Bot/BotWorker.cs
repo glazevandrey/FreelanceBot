@@ -1,20 +1,19 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Threading;
+﻿using Microsoft.Extensions.DependencyInjection;
+using NLog;
 using System;
-using Telegram.Bot.Types.Enums;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Extensions.Polling;
 using Telegram.Bot.Types;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using NLog;
+using Telegram.Bot.Types.Enums;
 
 namespace FreelanceBot.Bot
 {
     public class BotWorker
     {
-        private static  Logger logger = LogManager.GetCurrentClassLogger();
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         public BotWorker()
         {
         }
@@ -32,7 +31,7 @@ namespace FreelanceBot.Bot
             types.Add(UpdateType.Message);
             var options = new ReceiverOptions
             {
-                AllowedUpdates = new[] { UpdateType.Message,  UpdateType.CallbackQuery, UpdateType.InlineQuery, UpdateType.MyChatMember, UpdateType.ChatMember, UpdateType.ChannelPost }
+                AllowedUpdates = new[] { UpdateType.Message, UpdateType.CallbackQuery, UpdateType.InlineQuery, UpdateType.MyChatMember, UpdateType.ChatMember, UpdateType.ChannelPost }
             };
 
             Program.botClient.StartReceiving(

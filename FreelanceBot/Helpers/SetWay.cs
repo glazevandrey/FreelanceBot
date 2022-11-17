@@ -5,10 +5,8 @@ using FreelanceBot.Actions.ResumeActions;
 using FreelanceBot.Actions.WorkerActions;
 using FreelanceBot.Database;
 using FreelanceBot.Models;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
-using Telegram.Bot;
 
 namespace FreelanceBot.Helpers
 {
@@ -22,9 +20,9 @@ namespace FreelanceBot.Helpers
             var user = new User();
             using (var db = new UserContext())
             {
-                user = db.Users.FirstOrDefault(m=>m.ChatId == update.CallbackQuery.From.Id);
+                user = db.Users.FirstOrDefault(m => m.ChatId == update.CallbackQuery.From.Id);
             }
-           if(update.CallbackQuery != null)
+            if (update.CallbackQuery != null)
             {
                 if (update.CallbackQuery.Data.Contains("wantPack"))
                 {
@@ -32,7 +30,7 @@ namespace FreelanceBot.Helpers
                     return result;
                 }
             }
-            if(user.Role == Role.Заказчик)
+            if (user.Role == Role.Заказчик)
             {
                 if (update.CallbackQuery.Data.Contains("spec"))
                 {
@@ -78,7 +76,7 @@ namespace FreelanceBot.Helpers
                     result.Add(new ResultSeaByPlaceWorkerAction());
                 }
             }
-            
+
 
             return result;
         }
@@ -87,13 +85,13 @@ namespace FreelanceBot.Helpers
         {
             IBaseAction type;
             List<IBaseAction> result = new List<IBaseAction>();
-            if(update.Message == null)
+            if (update.Message == null)
             {
                 return result;
             }
 
-           
-            if(update.Message.Type == Telegram.Bot.Types.Enums.MessageType.Photo ||
+
+            if (update.Message.Type == Telegram.Bot.Types.Enums.MessageType.Photo ||
                 update.Message.Type == Telegram.Bot.Types.Enums.MessageType.Video ||
                 update.Message.Type == Telegram.Bot.Types.Enums.MessageType.Document)
             {
@@ -103,7 +101,7 @@ namespace FreelanceBot.Helpers
                     usr = db.Users.FirstOrDefault(m => m.ChatId == update.Message.From.Id);
                 }
 
-                if(usr.Role == Role.Исполнитель)
+                if (usr.Role == Role.Исполнитель)
                 {
                     WorkerWay way = new WorkerWay();
                     return way.Start(update, usr);
@@ -113,9 +111,9 @@ namespace FreelanceBot.Helpers
                     BossWay way = new BossWay();
                     return way.Start(update, usr);
                 }
-                
-            }  
-            
+
+            }
+
             if (update.Message.Text.StartsWith("/start"))
             {
 
@@ -125,7 +123,7 @@ namespace FreelanceBot.Helpers
                     usr = db.Users.FirstOrDefault(m => m.ChatId == update.Message.From.Id);
                 }
 
-                if(usr == null)
+                if (usr == null)
                 {
                     type = new StartAction();
                     result.Add(type);
@@ -133,7 +131,7 @@ namespace FreelanceBot.Helpers
                 }
                 else
                 {
-                    if(usr.Role == Role.Исполнитель)
+                    if (usr.Role == Role.Исполнитель)
                     {
                         result.Add(new MainMenuWorkerAction());
                         return result;

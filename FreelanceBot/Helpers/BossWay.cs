@@ -2,17 +2,11 @@
 using FreelanceBot.Actions.BossSearchingActions;
 using FreelanceBot.Actions.EventAction;
 using FreelanceBot.Actions.JobActions;
-using FreelanceBot.Actions.ResumeActions;
 using FreelanceBot.Database;
 using FreelanceBot.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.Collections.Generic;
 using System.Linq;
-using System.Transactions;
 using Telegram.Bot;
-using Telegram.Bot.Types;
-using Telegram.Bot.Types.ReplyMarkups;
 using Update = Telegram.Bot.Types.Update;
 
 namespace FreelanceBot.Helpers
@@ -52,7 +46,7 @@ namespace FreelanceBot.Helpers
             }
             if (user.Stage == Models.Stage.ПредПоказРаботы)
             {
-                if(update.Message.Text == "Done")
+                if (update.Message.Text == "Done")
                 {
                     var job = new Job();
                     using (var db = new UserContext())
@@ -85,7 +79,7 @@ namespace FreelanceBot.Helpers
             }
             if (user.Stage == Models.Stage.ХотитеФайл)
             {
-                if(update.Message.Text == "Yes")
+                if (update.Message.Text == "Yes")
                 {
                     result.Add(new SendDocEventAction());
                 }
@@ -124,7 +118,7 @@ namespace FreelanceBot.Helpers
                     SendToChannel.SendEventToAdmin(evnt, user);
                 }
             }
-           
+
 
             if (update.Message.Text == "Resume search")
             {
@@ -175,11 +169,11 @@ namespace FreelanceBot.Helpers
                 using (var db = new UserContext())
                 {
                     var job = db.Jobs.FirstOrDefault(m => m.UserId == user.ChatId && m.IsDone == false);
-                    if(job == null)
+                    if (job == null)
                     {
                         var evnt = new Event();
                         evnt = db.Events.FirstOrDefault(m => m.UserId == user.ChatId && m.IsDone == false);
-                        if(evnt == null)
+                        if (evnt == null)
                         {
                             result = new List<IBaseAction>();
                             result.Add(new MainMenuBossAction());
@@ -207,7 +201,7 @@ namespace FreelanceBot.Helpers
         }
         private IBaseAction ChooseSearch(string name)
         {
-            
+
             switch (name)
             {
                 case "By speciality":

@@ -11,7 +11,7 @@ namespace FreelanceBot.Services
             using (var db = new UserContext())
             {
                 var user = db.Users.SingleOrDefault(u => u.ChatId == id);
-                if(user == null)
+                if (user == null)
                 {
                     return;
                 }

@@ -20,7 +20,7 @@ namespace FreelanceBot.Actions.ResumeActions
                 {
                     return;
                 }
-                if(update.Message.Text != "Back")
+                if (update.Message.Text != "Back")
                 {
                     resume.Title = update.Message.Text;
                     db.SaveChanges();

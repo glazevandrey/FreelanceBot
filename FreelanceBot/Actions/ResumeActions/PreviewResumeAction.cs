@@ -1,20 +1,13 @@
 ﻿using FreelanceBot.Database;
 using FreelanceBot.Helpers;
 using FreelanceBot.Models;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using Telegram.Bot;
 using Telegram.Bot.Types;
-using Telegram.Bot.Types.InputFiles;
 using Telegram.Bot.Types.ReplyMarkups;
-using static System.Net.Mime.MediaTypeNames;
-using File = System.IO.File;
 using User = FreelanceBot.Models.User;
 
 namespace FreelanceBot.Actions.ResumeActions
@@ -29,13 +22,13 @@ namespace FreelanceBot.Actions.ResumeActions
             var user = new User();
             using (var db = new UserContext())
             {
-                user = db.Users.FirstOrDefault(m=>m.ChatId == update.Message.From.Id);
+                user = db.Users.FirstOrDefault(m => m.ChatId == update.Message.From.Id);
                 count = db.Resumes.Where(m => m.UserId == update.Message.From.Id && m.IsDone == true).ToList().Count();
 
             }
 
             int max = user.MaxResumes;
-            if(update.Message.Type != Telegram.Bot.Types.Enums.MessageType.Text)
+            if (update.Message.Type != Telegram.Bot.Types.Enums.MessageType.Text)
             {
                 try
                 {
@@ -80,7 +73,7 @@ namespace FreelanceBot.Actions.ResumeActions
             }
             else if (resume2.PayMin != 0)
             {
-                text2 = text2.Replace("[pay]", resume2.PayMin.ToString()  + " - "+ resume2.PayMax.ToString() + "$");
+                text2 = text2.Replace("[pay]", resume2.PayMin.ToString() + " - " + resume2.PayMax.ToString() + "$");
             }
             else
             {
@@ -93,7 +86,7 @@ namespace FreelanceBot.Actions.ResumeActions
 
             var rkm = new ReplyKeyboardMarkup(new List<KeyboardButton>() { btn1, btn2, btn3 });
             rkm.ResizeKeyboard = true;
-            await Program.botClient.SendTextMessageAsync(update.Message.From.Id, $"<b>({count+1}/{max})</b>\n\n" + text2, parseMode: Telegram.Bot.Types.Enums.ParseMode.Html);
+            await Program.botClient.SendTextMessageAsync(update.Message.From.Id, $"<b>({count + 1}/{max})</b>\n\n" + text2, parseMode: Telegram.Bot.Types.Enums.ParseMode.Html);
 
             await Program.botClient.SendTextMessageAsync(update.Message.From.Id, "Great! You are one step away from placing a resume.\n\nIf everything suits you click Done if not Go Back or Cancel", replyMarkup: rkm);
 

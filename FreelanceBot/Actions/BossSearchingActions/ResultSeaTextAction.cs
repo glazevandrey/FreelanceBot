@@ -1,13 +1,13 @@
 ﻿using FreelanceBot.Database;
+using FreelanceBot.Helpers;
 using FreelanceBot.Models;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
-using System.Linq;
-using FreelanceBot.Helpers;
 
 namespace FreelanceBot.Actions.BossSearchingActions
 {
@@ -62,8 +62,8 @@ namespace FreelanceBot.Actions.BossSearchingActions
 
 
 
-            var btns = Search.FillButtons(list,offset,text, "text");
-            
+            var btns = Search.FillButtons(list, offset, text, "text");
+
             var rkm = new InlineKeyboardMarkup(btns);
 
             var neededText = dic[offset];

@@ -1,5 +1,4 @@
 ﻿using FreelanceBot.Database;
-using FreelanceBot.Helpers;
 using FreelanceBot.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,15 +27,15 @@ namespace FreelanceBot.Actions.JobActions
                     return;
                 }
                 count = db.Jobs.Where(m => m.UserId == update.Message.From.Id && m.IsDone == true).ToList().Count();
-                
 
-                user = db.Users.FirstOrDefault(m=>m.ChatId == update.Message.From.Id);
+
+                user = db.Users.FirstOrDefault(m => m.ChatId == update.Message.From.Id);
                 if (update.Message.Text != "Back")
                 {
                     job.TypeJob = update.Message.Text;
                     db.SaveChanges();
                 }
-                
+
             }
             max = user.MaxJobs;
             var btn1 = new KeyboardButton("Done");
@@ -62,14 +61,14 @@ namespace FreelanceBot.Actions.JobActions
             }
             else if (job.PayMin != 0)
             {
-                text = text.Replace("[pay]", job.PayMin.ToString() +" - " + job.PayMax.ToString() + "$");
+                text = text.Replace("[pay]", job.PayMin.ToString() + " - " + job.PayMax.ToString() + "$");
             }
             else
             {
                 text = text.Replace("[pay]", "No expectations");
             }
 
-            await Program.botClient.SendTextMessageAsync(update.Message.From.Id, $"<b>({count+1}/{max})</b>\n\n" + text, parseMode: Telegram.Bot.Types.Enums.ParseMode.Html);
+            await Program.botClient.SendTextMessageAsync(update.Message.From.Id, $"<b>({count + 1}/{max})</b>\n\n" + text, parseMode: Telegram.Bot.Types.Enums.ParseMode.Html);
 
             await Program.botClient.SendTextMessageAsync(update.Message.From.Id, "Great! You are one step away from placing a job.\n\nIf everything suits you click Done if not Go Back or Cancel", replyMarkup: rkm);
 

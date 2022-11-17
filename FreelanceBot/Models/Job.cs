@@ -15,7 +15,7 @@ namespace FreelanceBot.Models
 
 
         public int PayMin { get; set; }
-        public int PayMax{ get; set; }
+        public int PayMax { get; set; }
         public int Pay { get; set; }
 
         public string Place { get; set; }

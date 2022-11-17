@@ -4,6 +4,6 @@ namespace FreelanceBot.Models
 {
     public class Config
     {
-        public List<string> Specialization{ get; set; }
+        public List<string> Specialization { get; set; }
     }
 }

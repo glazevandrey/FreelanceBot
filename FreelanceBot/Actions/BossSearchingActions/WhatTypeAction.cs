@@ -12,7 +12,7 @@ namespace FreelanceBot.Actions.BossSearchingActions
         {
             Program.stageService.SetStage(update.Message.From.Id, 24);
 
-            
+
             var btn1 = "By speciality";
             var btn3 = "By level";
             var btn4 = "By salary";
@@ -20,7 +20,7 @@ namespace FreelanceBot.Actions.BossSearchingActions
             var btn6 = "By text";
             var btn7 = "Back";
 
-            var  mist =new List<string>() { btn1, btn3, btn4, btn5, btn6, btn7 };
+            var mist = new List<string>() { btn1, btn3, btn4, btn5, btn6, btn7 };
 
             var rows = new List<KeyboardButton[]>();
             var cols = new List<KeyboardButton>();
@@ -41,7 +41,7 @@ namespace FreelanceBot.Actions.BossSearchingActions
 
             rkm.Keyboard = rows.ToArray();
             rkm.ResizeKeyboard = true;
-        
+
             await Program.botClient.SendTextMessageAsync(update.Message.From.Id, "<b>Select the search type</b>", replyMarkup: rkm, parseMode: Telegram.Bot.Types.Enums.ParseMode.Html);
 
         }

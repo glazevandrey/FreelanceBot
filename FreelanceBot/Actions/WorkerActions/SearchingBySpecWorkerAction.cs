@@ -1,7 +1,4 @@
-﻿using FreelanceBot.Database;
-using FreelanceBot.Models;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
@@ -37,7 +34,7 @@ namespace FreelanceBot.Actions.WorkerActions
             rkm.Keyboard = rows.ToArray();
             rkm.ResizeKeyboard = true;
 
-            await Program.botClient.SendTextMessageAsync(update.Message.From.Id, "<b>Choose the necessary specialization</b>", replyMarkup:rkm, parseMode: Telegram.Bot.Types.Enums.ParseMode.Html);
+            await Program.botClient.SendTextMessageAsync(update.Message.From.Id, "<b>Choose the necessary specialization</b>", replyMarkup: rkm, parseMode: Telegram.Bot.Types.Enums.ParseMode.Html);
 
         }
     }
