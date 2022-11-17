@@ -13,7 +13,7 @@ namespace FreelanceBot.Database
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(@"server=mysql.j81076941.myjino.ru;user=j81076941;password=448agiAoi;database=j81076941_jobs;");
+            optionsBuilder.UseMySql(@"server=mysql.j91146254.myjino.ru;user=j91146254;password=kompass84;database=j91146254_jobs;");
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Job> Jobs { get; set; }
