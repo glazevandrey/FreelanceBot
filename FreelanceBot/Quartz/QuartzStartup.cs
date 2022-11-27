@@ -29,7 +29,7 @@ namespace FreelanceBot.Quartz
                 .WithIdentity("ParseJobTrigger", "group1")
                 .StartAt(DateTimeOffset.Now.AddSeconds(5))
                 .WithSimpleSchedule(x => x
-                    .WithIntervalInMinutes(10)
+                    .WithIntervalInHours(20)
                     .RepeatForever())
                 .Build();
             await scheduler.ScheduleJob(job, trigger);

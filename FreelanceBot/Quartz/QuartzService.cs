@@ -180,9 +180,9 @@ namespace FreelanceBot.Quartz
 
                         continue;
                     }
-                    Thread.Sleep(10000);
+                    Thread.Sleep(60000);
                 }
-                Thread.Sleep(30000);
+                Thread.Sleep(160000);
 
             }
 
