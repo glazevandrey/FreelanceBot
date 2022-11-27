@@ -10,9 +10,9 @@ namespace FreelanceBot.Helpers
     public class SendToChannel
     {
         //test
-        //public static long _channelId = -1001862646659;
+       // public static long _channelId = -1001708956288;
 
-        public static long _channelId = -1001874357683;
+       public static long _channelId = -1001874357683;
 
 
         public static long _adminId;
@@ -121,6 +121,14 @@ namespace FreelanceBot.Helpers
             }
 
             Program.botClient.SendTextMessageAsync(_channelId, text, parseMode: Telegram.Bot.Types.Enums.ParseMode.Html);
+
+        }
+        public static async void Send(string text)
+        {
+
+           
+                await Program.botClient.SendTextMessageAsync(_channelId, text, parseMode: Telegram.Bot.Types.Enums.ParseMode.Html);           
+
 
         }
 

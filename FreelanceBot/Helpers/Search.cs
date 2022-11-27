@@ -4,11 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using Telegram.Bot;
 using Telegram.Bot.Types.InputFiles;
 using Telegram.Bot.Types.ReplyMarkups;
+using static Quartz.Logging.OperationName;
 using File = System.IO.File;
+using Job = FreelanceBot.Models.Job;
 using Update = Telegram.Bot.Types.Update;
 using User = FreelanceBot.Models.User;
 
@@ -52,13 +55,49 @@ namespace FreelanceBot.Helpers
 
             return dic;
         }
+        public static string FillKayValueParsedIT(Job jobEn)
+        {
+
+          
+                string text = Program.ParsedJobView;
+               
+                var desc = Regex.Replace(jobEn.Description, @"<p.*?>", String.Empty, RegexOptions.CultureInvariant).Replace("<p>", "\n").Replace("</p>", string.Empty);
+                desc = Regex.Replace(desc, @"<ul.*?>", String.Empty, RegexOptions.CultureInvariant).Replace("<ul>", string.Empty).Replace("</ul>", string.Empty);
+                desc = Regex.Replace(desc, @"<li.*?>", String.Empty, RegexOptions.CultureInvariant).Replace("<li>", string.Empty).Replace("</li>", string.Empty);
+                desc = desc.Replace("<bold>", "\n<bold>");
+                desc = desc.Replace("<b>", "\n<b>");
+                desc = desc.Replace("<strong>", "\n<strong>");
+                desc = desc.Replace("<br>", "\n");
+                desc = desc.Replace("</br>", string.Empty);
+                desc = desc.Replace("<br />", "\n");
+                desc = desc.Replace("<br/>", "\n");
+
+                text = text.Replace("[title]", jobEn.Title);
+                text = text.Replace("[contact]", jobEn.Contact);
+                text = text.Replace("[description]", desc);
+                text = text.Replace("[level]", jobEn.Level);
+                text = text.Replace("[place]", jobEn.Place);
+                text = text.Replace("[type]", jobEn.TypeJob);
+                
+            
+
+            return text;
+        }
         public static Dictionary<int, string> FillKayValue(List<Job> list)
         {
             var dic = new Dictionary<int, string>();
             int x = 0;
             foreach (var resume in list)
             {
+              
                 string text = Program.JobView;
+                if (resume.UserId == 0)
+                {
+                    text = FillKayValueParsedIT(resume);
+                    dic.Add(x, text);
+                    x++;
+                    continue;
+                }
                 using (var db = new UserContext())
                 {
                     text = text.Replace("[username]", "@" + db.Users.FirstOrDefault(m => m.ChatId == resume.UserId).Username);

@@ -1,5 +1,7 @@
 using FreelanceBot.Bot;
 using FreelanceBot.Executors;
+using FreelanceBot.Quartz.Jobs;
+using FreelanceBot.Quartz;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,11 +25,12 @@ namespace FreelanceBot
             services.AddControllers();
             services.AddTransient<BotService>()
                     .AddTransient<BotWorker>()
-                    .AddTransient<MessageExecutor>();
-
+                    .AddTransient<MessageExecutor>()
+                    .AddTransient<ParseJob>()
+                    .AddTransient<IQuartzService, QuartzService>(); 
 
             var serviceProvider = services.BuildServiceProvider();
-            //QuartzStartup.Start(serviceProvider, Configuration); // запуск выполнения планировщика задач 
+            QuartzStartup.Start(serviceProvider, Configuration); // запуск выполнения планировщика задач 
 
             BotWorker.InitBot(serviceProvider); // ицициализация бота
         }
