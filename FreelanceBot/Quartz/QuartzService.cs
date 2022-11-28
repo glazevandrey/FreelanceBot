@@ -139,7 +139,27 @@ namespace FreelanceBot.Quartz
                         return;
                     }
 
-             
+                    using (var db = new UserContext())
+                    {
+
+                        try
+                        {
+                            if (db.Jobs.FirstOrDefault(m => m.Description == jobEn.Description) != null)
+                            {
+                                continue;
+                            }
+                            jobEn.IsDone = true;
+                            db.Jobs.Add(jobEn);
+                            db.SaveChanges();
+
+                        }
+                        catch (Exception ex)
+                        {
+                            logger.Error("when save to db: " + jobEn.Description + "\n\n" + ex.Message);
+
+                            return;
+                        }
+                    }
 
                     try
                     {
@@ -172,27 +192,7 @@ namespace FreelanceBot.Quartz
                     }
 
 
-                    using (var db = new UserContext())
-                    {
-
-                        try
-                        {
-                            if (db.Jobs.FirstOrDefault(m => m.Description == jobEn.Description) != null)
-                            {
-                                continue;
-                            }
-                            jobEn.IsDone = true;
-                            db.Jobs.Add(jobEn);
-                            db.SaveChanges();
-
-                        }
-                        catch (Exception ex)
-                        {
-                            logger.Error("when save to db: " + jobEn.Description + "\n\n" + ex.Message);
-
-                            return;
-                        }
-                    }
+                  
                     Thread.Sleep(60000);
                 }
                 Thread.Sleep(160000);
