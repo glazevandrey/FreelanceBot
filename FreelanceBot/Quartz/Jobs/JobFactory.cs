@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using NLog;
 using Quartz;
 using Quartz.Spi;
 using System;
@@ -9,6 +10,7 @@ namespace FreelanceBot.Quartz.Jobs
     {
         private readonly IServiceProvider _serviceProvider;
 
+        private static Logger logger = LogManager.GetCurrentClassLogger();
 
         public JobFactory(IServiceProvider serviceProvider)
         {
@@ -39,6 +41,7 @@ namespace FreelanceBot.Quartz.Jobs
         {
             var disposable = job as IDisposable;
             disposable?.Dispose();
+            logger.Info("job was disposed");
         }
     }
 }
