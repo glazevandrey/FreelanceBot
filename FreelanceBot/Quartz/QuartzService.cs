@@ -171,8 +171,17 @@ namespace FreelanceBot.Quartz
                             }
                             catch (Exception ex2)
                             {
-                                Thread.Sleep(5000);
-                                await Program.botClient.SendTextMessageAsync(SendToChannel._channelId, text2, parseMode: Telegram.Bot.Types.Enums.ParseMode.Html);
+                                Thread.Sleep(10000);
+                                try
+                                {
+                                    await Program.botClient.SendTextMessageAsync(SendToChannel._channelId, text2, parseMode: Telegram.Bot.Types.Enums.ParseMode.Html);
+
+                                }
+                                catch (Exception ex3)
+                                {
+
+                                    throw ex3;
+                                }
 
                             }
 
