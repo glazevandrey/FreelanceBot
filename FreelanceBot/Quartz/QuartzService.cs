@@ -6,6 +6,7 @@ using FreelanceBot.Parsers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using NLog;
+using NLog.Fluent;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -37,8 +38,10 @@ namespace FreelanceBot.Quartz
             var jobs =  parser.ParseNewJobs();
             foreach (var item in jobs)
             {
+                
                 foreach (var job in item.Value)
                 {
+                    logger.Info(job.title+ " started");
                     string text = Program.ParsedJobView;
 
                     var jobEn = new Job();
@@ -187,7 +190,7 @@ namespace FreelanceBot.Quartz
                             }
 
                         }
-
+                        logger.Info(job.title + " ended");
                         continue;
                     }
 
