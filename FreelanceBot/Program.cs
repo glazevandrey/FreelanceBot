@@ -6,6 +6,7 @@ using FreelanceBot.Parsers;
 using FreelanceBot.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using NLog;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,6 +16,8 @@ namespace FreelanceBot
 {
     public class Program
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         public static Telegram.Bot.TelegramBotClient botClient;
         public static IBotService _botService;
         public static ValidateRequest validator = new ValidateRequest();
@@ -28,7 +31,7 @@ namespace FreelanceBot
         public static string ResumeView = $"<b>Resume - [title]</b>\n\nContact - [username]\n\nDescription - [description]\n\nSpecialist level - [level]\n\nDesired payment - [pay]\n\nPlace - [place]";
         public static void Main(string[] args)
         {
-           
+            logger.Info("START");
             StartInit();
             CreateHostBuilder(args).Build().Run();
         }
