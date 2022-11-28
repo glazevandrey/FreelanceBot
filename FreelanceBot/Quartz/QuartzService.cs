@@ -179,8 +179,7 @@ namespace FreelanceBot.Quartz
                                 }
                                 catch (Exception ex3)
                                 {
-
-                                    throw ex3;
+                                    continue;
                                 }
 
                             }
