@@ -209,7 +209,7 @@ namespace FreelanceBot.Quartz
                   
                     Thread.Sleep(60000);
                 }
-                Thread.Sleep(160000);
+                Thread.Sleep(60000);
 
             }
 
