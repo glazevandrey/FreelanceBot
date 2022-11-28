@@ -36,6 +36,12 @@ namespace FreelanceBot.Quartz
         {
             var parser = new ITJobSite();
             var jobs =  parser.ParseNewJobs();
+            var all_db = new List<Job>();
+            using (var db = new UserContext())
+            {
+                all_db = db.Jobs.ToList();
+            }
+
             foreach (var item in jobs)
             {
                 
@@ -47,6 +53,12 @@ namespace FreelanceBot.Quartz
                     var jobEn = new Job();
 
                     jobEn.Description = job.body;
+                    if(all_db.FirstOrDefault(m=>m.Description == job.body) != null)
+                    {
+                        continue;
+                    }
+                    var desc = Regex.Replace(jobEn.Description, @"<p.*?>", String.Empty, RegexOptions.CultureInvariant).Replace("<p>", "\n").Replace("</p>", string.Empty);
+
                     jobEn.Title = item.Key;
                     jobEn.Pay = 0;
                     if (job.locations != null)
@@ -113,7 +125,6 @@ namespace FreelanceBot.Quartz
                         jobEn.Contact += "\nCompany email: " + job.company.email;
 
                     }
-                    var desc = Regex.Replace(jobEn.Description, @"<p.*?>", String.Empty, RegexOptions.CultureInvariant).Replace("<p>", "\n").Replace("</p>", string.Empty);
 
 
                     try
