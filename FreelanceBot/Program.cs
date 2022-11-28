@@ -31,7 +31,16 @@ namespace FreelanceBot
         public static string ResumeView = $"<b>Resume - [title]</b>\n\nContact - [username]\n\nDescription - [description]\n\nSpecialist level - [level]\n\nDesired payment - [pay]\n\nPlace - [place]";
         public static void Main(string[] args)
         {
-            logger.Info("START");
+            try
+            {
+                logger.Info("START");
+
+            }
+            catch (System.Exception ex)
+            {
+
+                throw ex;
+            }
             StartInit();
             CreateHostBuilder(args).Build().Run();
         }
